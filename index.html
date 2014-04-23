@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<body>
+  <h1>Welcome to Lisboa Project!</h1>
+  <p>{{nickname}} <a href="{{log_url|safe}}">{{log_msg}}</a></p>
+  <p><a href="/createQuoteBook">make quote group</a></p>
+  <p><a href="/writeQuote">write quote group</a></p>
+  <p><a href="/displayQuote">display all quotes</a></p>
+</body>
+</html>
+{% endautoescape %}
