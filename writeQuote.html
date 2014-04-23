@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<body>
+<form action="/writeQuote" method="post">
+<div>
+<select name="book_id">
+
+{% for i in book_list %}
+<option value="{{i.key.integer_id()}}">{{ i.name }}</option>
+{% endfor %}
+</div>
+
+<div>
+  <p>
+	Messages
+  </p>
+
+  <textarea name="msg" rows="3" cols="60"></textarea>
+</div>
+<div>
+  <p>
+	link (optional)
+<input type="text" name="link" />
+
+  <input type="checkbox" name="private" value="True" /> Private
+  </p>
+</div>
+<div>
+<input type="submit" value="Write" />
+</div>
+</form>
+</body>
+</html>
+{% endautoescape %}
