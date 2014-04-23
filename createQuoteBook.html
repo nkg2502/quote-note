@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<body>
+<form action="/createQuoteBook" method="post">
+<div>
+  <p>
+	Book name
+  <input type="text" name="name" />
+  </p>
+</div>
+<div>
+  <p>
+	ISBN
+<input type="text" name="isbn" />
+  </p>
+</div>
+<div>
+<input type="submit" value="Create" />
+</div>
+</form>
+</body>
+</html>
+{% endautoescape %}
