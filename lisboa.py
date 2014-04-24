@@ -20,9 +20,11 @@ class QuoteBook(ndb.Model):
 	cover_photo = ndb.BlobKeyProperty()
 
 class Quote(ndb.Model):
+	private = ndb.BooleanProperty()
 	content = ndb.StringProperty()
 	link = ndb.StringProperty()
-	private = ndb.BooleanProperty()
+	created_date = ndb.DateTimeProperty(auto_now_add=True)
+	modified_date = ndb.DateTimeProperty(auto_now=True)
 
 class MainPage(webapp2.RequestHandler):
 
