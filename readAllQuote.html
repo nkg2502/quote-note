@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<style>
+div {
+	border: 1px solid black;
+}
+</style>
+<body>
+
+{% for i in quote_list %}
+<div>
+	<p>original : {{i.book_name}}</p>
+	<p>{{i.content}}</p>
+	<p>link : {{i.link}}</p>
+	<p>writer : {{i.user}}</p>
+</div>
+{% endfor %}
+</body>
+</html>
+{% endautoescape %}

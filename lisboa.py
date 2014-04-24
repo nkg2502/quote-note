@@ -111,9 +111,36 @@ class WriteQuoteHandler(webapp2.RequestHandler):
 
 		self.redirect('/')
 
+class ReadQuoteHandler(webapp2.RequestHandler):
+
+	def get(self):
+
+		quoteQuery = Quote.query()
+		rawQuoteList = quoteQuery.fetch()
+		
+		quoteList = []
+		for quote in rawQuoteList:
+			if not quote.private:
+				quoteList.append({
+					'user' : quote.key.parent().get().key.parent().string_id(),
+					'book_name': quote.key.parent().get().name,
+					'content' : quote.content,
+					'link' : quote.link
+				})
+
+		page_value = {
+				'quote_list': quoteList
+		}
+
+		page = JINJA_ENVIRONMENT.get_template('readAllQuote.html')
+
+		self.response.headers['Content-Type'] = 'text/html'
+		self.response.write(page.render(page_value))
+
 application = webapp2.WSGIApplication([
 	('/', MainPage),
 	('/createQuoteBook', CreateQuoteBookHandler),
 	('/writeQuote', WriteQuoteHandler),
+	('/displayQuote', ReadQuoteHandler),
 ], debug=True)
 
