@@ -127,7 +127,9 @@ class ReadQuoteHandler(webapp2.RequestHandler):
 					'user' : quote.key.parent().get().key.parent().string_id(),
 					'book_name': quote.key.parent().get().name,
 					'content' : quote.content,
-					'link' : quote.link
+					'link' : quote.link,
+					'created_date' : quote.created_date,
+					'modified' : quote.modified_date
 				})
 
 		page_value = {
