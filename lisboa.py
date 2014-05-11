@@ -129,7 +129,7 @@ class ReadQuoteHandler(webapp2.RequestHandler):
 					'book_name': quote.key.parent().get().name,
 					'content' : quote.content,
 					'link' : quote.link,
-					'created_date' : quote.created_date,
+					'created' : quote.created_date,
 					'modified' : quote.modified_date
 				})
 
@@ -157,7 +157,7 @@ class MobileReadQuoteHandler(webapp2.RequestHandler):
 					'book_name': quote.key.parent().get().name,
 					'content' : quote.content,
 					'link' : quote.link,
-					'created_date' : quote.created_date.strftime('%Y%m%d'),
+					'created' : quote.created_date.strftime('%Y%m%d'),
 					'modified' : quote.modified_date.strftime('%Y%m%d')
 				})
 
