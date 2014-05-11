@@ -161,8 +161,12 @@ class MobileReadQuoteHandler(webapp2.RequestHandler):
 					'modified' : quote.modified_date.strftime('%Y%m%d')
 				})
 
+		page_value = {
+				'quote_list': quoteList
+		}
+
 		self.response.headers['Content-Type'] = 'text/json'
-		self.response.write(json.dumps(quoteList))
+		self.response.write(json.dumps(page_value))
 
 application = webapp2.WSGIApplication([
 	('/', MainPage),
