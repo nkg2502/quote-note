@@ -2,6 +2,7 @@
 	Lisboa prototype
 '''
 import os
+import json
 
 from google.appengine.api import users
 from google.appengine.ext import ndb
@@ -141,10 +142,33 @@ class ReadQuoteHandler(webapp2.RequestHandler):
 		self.response.headers['Content-Type'] = 'text/html'
 		self.response.write(page.render(page_value))
 
+class MobileReadQuoteHandler(webapp2.RequestHandler):
+
+	def get(self):
+
+		quoteQuery = Quote.query()
+		rawQuoteList = quoteQuery.fetch()
+		
+		quoteList = []
+		for quote in rawQuoteList:
+			if not quote.private:
+				quoteList.append({
+					'user' : quote.key.parent().get().key.parent().string_id(),
+					'book_name': quote.key.parent().get().name,
+					'content' : quote.content,
+					'link' : quote.link,
+					'created_date' : quote.created_date.strftime('%Y%m%d'),
+					'modified' : quote.modified_date.strftime('%Y%m%d')
+				})
+
+		self.response.headers['Content-Type'] = 'text/json'
+		self.response.write(json.dumps(quoteList))
+
 application = webapp2.WSGIApplication([
 	('/', MainPage),
 	('/createQuoteBook', CreateQuoteBookHandler),
 	('/writeQuote', WriteQuoteHandler),
 	('/displayQuote', ReadQuoteHandler),
+	('/mobile/displayQuote', MobileReadQuoteHandler),
 ], debug=True)
 
